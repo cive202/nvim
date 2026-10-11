@@ -7,7 +7,7 @@ return {
     lazy = false,
     config = function()
       local parsers = {
-        "lua", "vim", "vimdoc", "query",
+        "lua", "vim", "vimdoc", "query","python",
         "javascript", "typescript", "tsx", "html", "css", "json",
         "gitignore", "go", "php",
       }
