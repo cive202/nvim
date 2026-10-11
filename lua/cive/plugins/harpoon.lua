@@ -1,5 +1,4 @@
 -- Pin a few files and jump between them instantly.
--- Primeagen uses Ctrl+h/t/n/s on his split keyboard. Those clash with your
 -- split navigation (Ctrl+h/j/k/l), so on a normal keyboard this uses <leader>1-4.
 return {
   "ThePrimeagen/harpoon",

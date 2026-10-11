@@ -11,7 +11,8 @@ map("n", "<leader>x", "<cmd>x<CR>", { desc = "Save and quit" })
 
 -- Clear search highlights
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
-
+-- Insert mode to normal mode
+map("i", "jk", "<Esc>", { desc = "Exit insert mode" })
 -- Navigate between split windows
 map("n", "<C-h>", "<C-w>h", { desc = "Move left" })
 map("n", "<C-j>", "<C-w>j", { desc = "Move down" })
@@ -43,8 +44,6 @@ map("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = "Close buffer" })
 map("n", "<leader>e", "<cmd>Explore<CR>", { desc = "File explorer" })
 
 -- LSP diagnostics
-map("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
-map("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
 map("n", "<leader>d", vim.diagnostic.open_float, { desc = "Show diagnostic" })
 
 -- Increment/decrement numbers
