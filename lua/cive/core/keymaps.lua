@@ -13,13 +13,11 @@ map("n", "<leader>x", "<cmd>x<CR>", { desc = "Save and quit" })
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 -- Insert mode to normal mode
 map("i", "jk", "<Esc>", { desc = "Exit insert mode" })
--- Navigate between split windows
-map("n", "<C-h>", "<C-w>h", { desc = "Move left" })
-map("n", "<C-j>", "<C-w>j", { desc = "Move down" })
-map("n", "<C-k>", "<C-w>k", { desc = "Move up" })
-map("n", "<C-l>", "<C-w>l", { desc = "Move right" })
-
--- Indentation
+-- Move between windows using Alt + WASD
+map("n", "<A-a>", "<C-w>h", { desc = "Move to left window" })
+map("n", "<A-s>", "<C-w>j", { desc = "Move to lower window" })
+map("n", "<A-w>", "<C-w>k", { desc = "Move to upper window" })
+map("n", "<A-d>", "<C-w>l", { desc = "Move to right window" })-- Indentation
 map("v", ">", ">gv", { desc = "Indent right" })
 map("v", "<", "<gv", { desc = "Indent left" })
 
