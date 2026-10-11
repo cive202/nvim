@@ -18,19 +18,19 @@ return {
 
     local builtin = require("telescope.builtin")
     local map = vim.keymap.set
-    map("n", "<leader>pf", builtin.find_files, { desc = "Find files" })
+    map("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
     map("n", "<C-p>", builtin.git_files, { desc = "Git files" })
-    map("n", "<leader>ps", function()
+    map("n", "<leader>fs", function()
       builtin.grep_string({ search = vim.fn.input("Grep > ") })
     end, { desc = "Grep for text" })
-    map("n", "<leader>pws", function()
+    map("n", "<leader>fws", function()
       builtin.grep_string({ search = vim.fn.expand("<cword>") })
     end, { desc = "Grep word under cursor" })
     map("n", "<leader>pWs", function()
       builtin.grep_string({ search = vim.fn.expand("<cWORD>") })
     end, { desc = "Grep WORD under cursor" })
     map("n", "<leader>vh", builtin.help_tags, { desc = "Help tags" })
-    map("n", "<leader>pb", builtin.buffers, { desc = "Open buffers" })
+    map("n", "<leader>fb", builtin.buffers, { desc = "Open buffers" })
   end,
 }
 
