@@ -11,5 +11,16 @@ return {
       end,
       desc = "Flash Jump",
     },
+    {
+      "S",
+      mode = { "n", "x", "o" },
+      function()
+        require("flash").jump({
+          search = { forward = false, wrap = false },
+        })
+      end,
+      desc = "Flash Jump Backward",
+    },
   },
 }
+
