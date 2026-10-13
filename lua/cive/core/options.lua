@@ -1,42 +1,36 @@
 vim.cmd("let g:netrw_liststyle = 3")
-local opt = vim.opt 
 
+local opt = vim.opt
+
+-- Line numbers
 opt.relativenumber = true
-
-local opt = vim.opt 
-
-opt.relativenumber = true
-opt.number  = true 
+opt.number = true
 
 -- Indentation settings
-opt.tabstop = 2        -- A tab character displays as 4 spaces
-opt.shiftwidth = 2     -- Indent by 4 spaces
-opt.expandtab = true   -- Convert tabs into spaces
-opt.autoindent = true  -- Copy indentation from previous line
+opt.tabstop = 4
+opt.shiftwidth = 4
+opt.softtabstop = 4
+opt.expandtab = true
+opt.autoindent = true
+opt.smartindent = true
 
-
-opt.wrap = false 
-
---search settings
-opt.ignorecase = true -- ignore case sensistivity
-opt.smartcase = true  -- smartcase sensitive
-
-opt.cursorline = true 
-
--- Enable true colors for Tokyo Night
+-- General settings
+opt.wrap = false
+opt.cursorline = true
 opt.termguicolors = true
-
--- Use a dark colorscheme background
 opt.background = "dark"
-
--- Keep text aligned when diagnostics or signs appear
 opt.signcolumn = "yes"
 
+-- Search settings
+opt.ignorecase = true
+opt.smartcase = true
+
+-- Backspace
 opt.backspace = { "indent", "eol", "start" }
 
-opt.clipboard:append("unnamedplus") --use systemclipboard as a default register
+-- System clipboard
+opt.clipboard:append("unnamedplus")
 
--- split windows
+-- Split windows
 opt.splitright = true
 opt.splitbelow = true
-
