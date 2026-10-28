@@ -16,6 +16,17 @@ autocmd("BufWritePre", {
   command = [[%s/\s\+$//e]],
 })
 
+-- YAML is indentation-sensitive; use 2 spaces instead of the global default
+autocmd("FileType", {
+  group = augroup("CiveYamlIndent", {}),
+  pattern = "yaml",
+  callback = function()
+    vim.bo.tabstop = 2
+    vim.bo.shiftwidth = 2
+    vim.bo.softtabstop = 2
+  end,
+})
+
 -- LSP keys, only in buffers that have a language server
 autocmd("LspAttach", {
   group = augroup("CiveLspAttach", {}),

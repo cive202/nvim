@@ -62,3 +62,31 @@ map("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab" })
 map("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" })
 
 
+-- this is the autocomplete 
+map("v", "<leader>ai", function()
+  local s = vim.fn.line("v")
+  local e = vim.fn.line(".")
+  if s > e then s, e = e, s end
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "nx", false)
+
+  local buf = vim.api.nvim_get_current_buf()
+  local lines = vim.api.nvim_buf_get_lines(buf, s - 1, e, false)
+  local prompt = table.concat({
+    "Complete or finish this code. Any comments describe what it should do.",
+    "Reply with ONLY the final replacement code, no markdown fences, no explanation.",
+    "Filetype: " .. vim.bo.filetype,
+    "",
+    table.concat(lines, "\n"),
+  }, "\n")
+
+  vim.notify("Claude is working...")
+  vim.system({ "claude", "-p", prompt, "--model", "haiku" }, { text = true }, function(res)
+    vim.schedule(function()
+      if res.code ~= 0 then
+        return vim.notify("Claude failed: " .. (res.stderr or ""), vim.log.levels.ERROR)
+      end
+      local out = res.stdout:gsub("^```%w*\n", ""):gsub("\n```%s*$", ""):gsub("%s+$", "")
+      vim.api.nvim_buf_set_lines(buf, s - 1, e, false, vim.split(out, "\n"))
+    end)
+  end)
+end, { desc = "Claude: complete selection" })

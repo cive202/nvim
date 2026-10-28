@@ -12,6 +12,7 @@ return {
     "L3MON4D3/LuaSnip",
     "saadparwaiz1/cmp_luasnip",
     "j-hui/fidget.nvim",
+    "b0o/schemastore.nvim",
   },
 
   config = function()
@@ -37,6 +38,17 @@ return {
       },
     })
 
+    vim.lsp.config("yamlls", {
+      settings = {
+        yaml = {
+          validate = true,
+          format = { enable = true },
+          schemaStore = { enable = false, url = "" },
+          schemas = require("schemastore").yaml.schemas(),
+        },
+      },
+    })
+
     require("fidget").setup({})
     require("mason").setup()
     require("mason-lspconfig").setup({
@@ -45,6 +57,7 @@ return {
         "pyright",
         "vtsls",
         "clangd",
+        "yamlls",
       },
       automatic_enable = true,
     })

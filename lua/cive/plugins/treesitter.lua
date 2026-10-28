@@ -9,7 +9,7 @@ return {
       local parsers = {
         "lua", "vim", "vimdoc", "query","python",
         "javascript", "typescript", "tsx", "html", "css", "json",
-        "gitignore", "go", "php",
+        "gitignore", "go", "php", "yaml",
       }
 
       require("nvim-treesitter").install(parsers)
