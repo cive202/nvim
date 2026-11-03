@@ -90,3 +90,6 @@ map("v", "<leader>ai", function()
     end)
   end)
 end, { desc = "Claude: complete selection" })
+
+map("n", "de", '"_D', { desc = "Delete to end of line without yanking" })
+map("n", 'd"', '"_di"', { desc = "Delete inside double quotes without yanking" })
