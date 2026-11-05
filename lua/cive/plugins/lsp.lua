@@ -3,8 +3,8 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason.nvim",
+    "mason-org/mason-lspconfig.nvim",
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
@@ -93,6 +93,22 @@ return {
     --   root_markers = { ".sqllsrc.json" },
     -- })
     -- vim.lsp.enable("sqlls")
+
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = vim.api.nvim_create_augroup("CiveLspPlugin", { clear = true }),
+      callback = function(ev)
+        local function map(lhs, rhs, desc)
+          vim.keymap.set("n", lhs, rhs, { buffer = ev.buf, desc = desc })
+        end
+        map("gd", vim.lsp.buf.definition, "LSP: Go to definition")
+        map("gD", vim.lsp.buf.declaration, "LSP: Go to declaration")
+        map("gr", vim.lsp.buf.references, "LSP: References")
+        map("gi", vim.lsp.buf.implementation, "LSP: Go to implementation")
+        map("K", vim.lsp.buf.hover, "LSP: Hover docs")
+        map("<leader>rn", vim.lsp.buf.rename, "LSP: Rename symbol")
+        map("<leader>ca", vim.lsp.buf.code_action, "LSP: Code action")
+      end,
+    })
 
     vim.diagnostic.config({
       float = {

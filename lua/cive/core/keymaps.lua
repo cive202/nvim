@@ -93,3 +93,31 @@ end, { desc = "Claude: complete selection" })
 
 map("n", "de", '"_D', { desc = "Delete to end of line without yanking" })
 map("n", 'd"', '"_di"', { desc = "Delete inside double quotes without yanking" })
+
+
+--jump in line
+map("n", "<leader>l", function()
+  local pat = vim.fn.input("Line search: ")
+  if pat == "" then return end
+  local line = vim.api.nvim_get_current_line()
+  local col = line:find(pat, vim.fn.col(".") + 1, true)
+  if not col then col = line:find(pat, 1, true) end  -- wrap to start of line
+  if col then
+    vim.api.nvim_win_set_cursor(0, { vim.fn.line("."), col - 1 })
+  else
+    vim.notify("Not found in line", vim.log.levels.WARN)
+  end
+end, { desc = "Jump to text in current line" })
+
+
+-- vim.lsp.enable("ts_ls")
+
+-- gd only gets mapped once a language server attaches to the buffer
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(ev)
+    local opts = { buffer = ev.buf }
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, vim.tbl_extend("force", opts, { desc = "References" }))
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover docs" }))
+  end,
+})
